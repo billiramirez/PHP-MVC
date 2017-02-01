@@ -9,7 +9,6 @@
         return $link;
     }
   }
-
   $a = new Conexion();
   $a -> conectar();
 
