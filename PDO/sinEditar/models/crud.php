@@ -40,6 +40,15 @@ require_once "conexion.php";
 
       }
 
+      public function vistaUsuariosModel($tabla){
+
+            $stmt = Conexion::conectar()->prepare("SELECT id, usuario, password, email FROM $tabla");
+            $stmt -> execute();
+            //fetchAll obtiene todas las filas
+            return $stmt->fetchAll();
+
+      }
+
 
     }
 

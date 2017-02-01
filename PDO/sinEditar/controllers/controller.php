@@ -62,21 +62,41 @@ class MvcController{
 
 				if (isset($_POST["usuarioIngreso"])) {
 					# code...
-					$datosController = array("usuario"=>$_POST["usuarioIngreso"],
-																		"password"=>$_POST["passwordIngreso"]);
+								$datosController = array("usuario"=>$_POST["usuarioIngreso"],
+																					"password"=>$_POST["passwordIngreso"]);
 
-					$respuesta = Datos::ingresoUsuarioModel($datosController, "usuarios");
+								$respuesta = Datos::ingresoUsuarioModel($datosController, "usuarios");
 
-					if ($respuesta["usuario"] == $_POST["usuarioIngreso"] && $respuesta["password"] == $_POST["passwordIngreso"]) {
-						# code...
-						header("location:index.php?action=usuarios");
+											if ($respuesta["usuario"] == $_POST["usuarioIngreso"] && $respuesta["password"] == $_POST["passwordIngreso"]) {
+														# code...
+														header("location:index.php?action=usuarios");
 
-					}
-					else {
-						 header("location:index.php?action=fallo");
-					}
+											}
+											else {
+														 header("location:index.php?action=fallo");
+											}
 				}
-	}
+		}
+
+		#Vista de Usuarios
+		/********************************************************************/
+
+		public function vistaUsuariosController(){
+
+				$respuesta =  Datos::vistaUsuariosModel("usuarios");
+				foreach ($respuesta as $row => $item) {
+					# code...
+					echo '<tr>
+									<td>'.$item["usuario"].'</td>
+									<td>'.$item["password"].'</td>
+									<td>'.$item["email"].'</td>
+									<td><button>Editar</button></td>
+									<td><button>Borrar</button></td>
+								</tr>';
+				}
+
+
+		}
 
 }
 
