@@ -6,7 +6,7 @@ $("#usuarioRegistro").change(function(){
     var datos = new FormData();
     datos.append("validarUsuario", usuario);
 
-    $.AJAX({
+    $.ajax({  // <----- No cambiar el nombre a mayuscula
             url:"views/modules/ajax.php",     //Accedemos al archivo que queremos ocupar
             method:"POST",
             data: datos,
@@ -15,7 +15,12 @@ $("#usuarioRegistro").change(function(){
             processData: false,
             success:function(respuesta){   //Al igual que en POO podemos acceder a la funcion
 
-                    console.log(respuesta);
+                    if (respuesta == 0) {
+                        $("label[for='usuarioRegistro'] span").html('<p>Este usuario ya existe en la BD</p>');
+                    }
+                    else {
+                        $("label[for='usuarioRegistro'] span").html("");
+                    }
             }
 
     });

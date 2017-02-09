@@ -2,7 +2,7 @@
 
 <form method="post" onsubmit="return validarRegistro()">
 
-	<label for="usuarioRegistro">Usuario</label>
+	<label for="usuarioRegistro">Usuario <span></span></label>
 	<input type="text" placeholder="Max 6 caracteres" maxlength="6" name="usuarioRegistro" id="usuarioRegistro" required>
 
 	<label for="passwordRegistro">Password</label>
