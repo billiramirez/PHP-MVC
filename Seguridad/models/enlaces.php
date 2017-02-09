@@ -26,6 +26,11 @@ class Paginas{
 			$module =  "views/modules/ingresar.php";
 
 		}
+		else if($enlaces == "fallo3intentos"){ //Si la variable action retorna "fallo" redirigir a ingresar.php
+
+			$module =  "views/modules/ingresar.php";
+
+		}
 		else if($enlaces == "cambio"){
 
 			$module =  "views/modules/usuarios.php";

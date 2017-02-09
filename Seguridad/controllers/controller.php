@@ -46,12 +46,12 @@ class MvcController{
 								# code...
 										$encriptar = crypt($_POST["passwordRegistro"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 										$datosController = array('usuario' =>$_POST['usuarioRegistro'] ,
-																	 'password' =>$encriptar,
-																	 'email' =>$_POST['emailRegistro']);
+																							 'password' =>$encriptar,
+																							 'email' =>$_POST['emailRegistro']);
 
 										$respuesta = Datos::registroUsuarioModel($datosController, "usuarios");
 										if ($respuesta == "success") {
-												header("location:index.php?action=ok");
+												header("location:ok");
 										}
 
 										else {
@@ -79,17 +79,38 @@ class MvcController{
 																					"password"=>$encriptar);
 
 								$respuesta = Datos::ingresoUsuarioModel($datosController, "usuarios");
+								$intentos = $respuesta["intentos"];
+								$usuario = $_POST["usuarioIngreso"];
+								$maximoIntentos = 2;
+								if ($intentos < $maximoIntentos) {
+									# code...
+												if ($respuesta["usuario"] == $_POST["usuarioIngreso"] && $respuesta["password"] == $encriptar) {
+															# code...
+															session_start();
+															$_SESSION["validar"] = true;
+															/*******CASO EN QUE INGRESO CORRECTAMENTE INCLUSO  SI FALLO MENOS DE DOS VECES*******/
+															$intentos = 0;
+															$datosController = array("usuarioActual" =>$usuario, "actualizarIntentos" => $intentos);
+															$respuestaActualizarIntentos = Datos::intentosUsuarioModel($datosController,"usuarios");
+															/**************************************************************************************/
+															header("location:usuarios");
 
-											if ($respuesta["usuario"] == $_POST["usuarioIngreso"] && $respuesta["password"] == $encriptar) {
-														# code...
-														session_start();
-														$_SESSION["validar"] = true;
-														header("location:index.php?action=usuarios");
+												}
+												else {
+															++$intentos;
+															$datosController = array("usuarioActual" =>$usuario, "actualizarIntentos" => $intentos);
+															$respuestaActualizarIntentos = Datos::intentosUsuarioModel($datosController,"usuarios");
+															 header("location:fallo");
+												}
+								}
+								else {
+									$intentos = 0;
+									$datosController = array("usuarioActual" =>$usuario, "actualizarIntentos" => $intentos);
+									$respuestaActualizarIntentos = Datos::intentosUsuarioModel($datosController,"usuarios");
+									header("location:fallo3intentos");
+								}
 
-											}
-											else {
-														 header("location:index.php?action=fallo");
-											}
+
 							}
 
 				}
@@ -155,7 +176,7 @@ class MvcController{
 
 												if($respuesta == "success"){
 
-													header("location:index.php?action=cambio");
+													header("location:cambio");
 
 												}
 
@@ -184,7 +205,7 @@ class MvcController{
 							$respuesta = Datos::borrarUsuarioModel($datosController, "usuarios");
 
 							if ($respuesta == "success") {
-									header("location:index.php?action=usuarios");
+									header("location:usuarios");
 							}
 
 				}

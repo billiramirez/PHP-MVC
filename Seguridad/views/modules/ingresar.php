@@ -20,6 +20,10 @@
 					# code...
 					echo "Fallo al Ingresar";
 				}
+				if ($_GET["action"] == "fallo3intentos") {
+					# code...
+					echo "Ha fallado 3 veces para ingresar, favor llenar el captcha";
+				}
 		}
 
 	 ?>
