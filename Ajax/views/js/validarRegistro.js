@@ -1,3 +1,6 @@
+  var usuarioExistente = false;
+  var emailExistente = false;
+
 // VALIDAR USUARIO EXISTENTE AJAX ---------------------------------------------
 
 $("#usuarioRegistro").change(function(){
@@ -17,9 +20,11 @@ $("#usuarioRegistro").change(function(){
 
                     if (respuesta == 0) {
                         $("label[for='usuarioRegistro'] span").html('<p>Este usuario ya existe en la BD</p>');
+                        usuarioExistente = true;
                     }
                     else {
                         $("label[for='usuarioRegistro'] span").html("");
+                        usuarioExistente = false;
                     }
             }
 
@@ -30,6 +35,42 @@ $("#usuarioRegistro").change(function(){
 
 
 // FIN VALIDAR USUARIO EXISTENTE AJAX------------------------------------------
+
+
+// VALIDAR EMAIL EXISTENTE AJAX ---------------------------------------------
+
+$("#emailRegistro").change(function(){
+
+    var email = $("#emailRegistro").val();
+    var datos = new FormData();
+    datos.append("validarEmail", email);
+
+    $.ajax({  // <----- No cambiar el nombre a mayuscula
+            url:"views/modules/ajax.php",     //Accedemos al archivo que queremos ocupar
+            method:"POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(respuesta){   //Al igual que en POO podemos acceder a la funcion
+
+                    if (respuesta == 0) {
+                        $("label[for='emailRegistro'] span").html('<p>Este email ya existe en la BD</p>');
+                        emailExistente = true;
+                    }
+                    else {
+                        $("label[for='emailRegistro'] span").html("");
+                        emailExistente = false;
+                    }
+            }
+
+    });
+
+
+});
+
+
+// FIN VALIDAR EMAIL EXISTENTE AJAX------------------------------------------
 
 
 
@@ -58,6 +99,10 @@ function validarRegistro(){
             document.querySelector("label[for='usuarioRegistro']").innerHTML += "<br> No escriba caracteres especiales.";
             return false;
           }
+          if (usuarioExistente) {
+            document.querySelector("label[for='usuarioRegistro'] span").html('<p>Este usuario ya existe en la BD</p>');
+            return false;
+          }
 
 
     }
@@ -79,6 +124,7 @@ function validarRegistro(){
           }
 
 
+
     }
 
     //***Validar email*********/
@@ -87,6 +133,11 @@ function validarRegistro(){
           var expresion =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
           if (!expresion.test(email)) {
             document.querySelector("label[for='emailRegistro']").innerHTML += "<br> Escriba correctamente el email.";
+            return false;
+          }
+          
+          if (emailExistente) {
+            document.querySelector("label[for='emailRegistro'] span").html('<p>Este email ya existe en la BD</p>');
             return false;
           }
 

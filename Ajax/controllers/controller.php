@@ -227,8 +227,22 @@ class MvcController{
 						echo 1;
 					}
 
+		}
 
+		#VALIDAR email EXISTENTE
+		#-----------------------------------------------------------------------------------------
+		public function validarEmailController($validarEmail){
 
+					$datosController = $validarEmail;
+
+					$respuesta = Datos::validarEmailModel($datosController, "usuarios");
+					if (count($respuesta["email"]) > 0){
+						# code...
+						echo 0;
+					}
+					else {
+						echo 1;
+					}
 
 		}
 
