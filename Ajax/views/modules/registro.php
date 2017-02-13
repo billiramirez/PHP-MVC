@@ -3,16 +3,10 @@
 <form method="post" onsubmit="return validarRegistro()">
 
 	<label for="usuarioRegistro">Usuario <span></span></label>
-	<input type="text" placeholder="Max 6 caracteres" maxlength="6" name="usuarioRegistro" id="usuarioRegistro" required>
-
-	<label for="passwordRegistro">Password <span></span></label>
-	<input type="password" placeholder="Minimo 6 caracteres, incluya numero(s) y una mayuscula" name="passwordRegistro" id="passwordRegistro"
-		pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
+	<input type="text" placeholder="Max 10 caracteres" maxlength="10" name="usuarioRegistro" id="usuarioRegistro" required>
 
 	<label for="emailRegistro">Email</label>
 	<input type="email" placeholder="Ingrese un email valido" name="emailRegistro" id="emailRegistro" required>
-
-	<p style="text-align:center"><input type="checkbox" id="terminos"><a href="#">Acepta Terminos y condiciones </a></p>
 
 	<input type="submit" value="Enviar">
 
