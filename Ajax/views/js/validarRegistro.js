@@ -56,7 +56,7 @@ $("#emailRegistro").change(function(){
 
                     if (respuesta == 0) {
                         $("label[for='emailRegistro'] span").html('<p>Este email ya existe en la BD</p>');
-                        emailExistente = true;
+                         emailExistente = true;
                     }
                     else {
                         $("label[for='emailRegistro'] span").html("");
@@ -98,7 +98,7 @@ function validarRegistro(){
             return false;
           }
           if (usuarioExistente) {
-            document.querySelector("label[for='usuarioRegistro'] span").html('<p>Este usuario ya existe en la BD</p>');
+            document.querySelector("label[for='usuarioRegistro'] span").innerHTML += "<p>Este usuario ya existe en la BD</p>";
             return false;
           }
 
@@ -117,7 +117,7 @@ function validarRegistro(){
           }
 
           if (emailExistente) {
-            document.querySelector("label[for='emailRegistro'] span").html('<p>Este email ya existe en la BD</p>');
+            document.querySelector("label[for='emailRegistro'] span").innerHTML ="<p>Este email ya existe en la BD</p> ";
             return false;
           }
 

@@ -5,7 +5,7 @@
 	<label for="usuarioRegistro">Usuario <span></span></label>
 	<input type="text" placeholder="Max 10 caracteres" maxlength="10" name="usuarioRegistro" id="usuarioRegistro" required>
 
-	<label for="emailRegistro">Email</label>
+	<label for="emailRegistro">Email <span></span></label>
 	<input type="email" placeholder="Ingrese un email valido" name="emailRegistro" id="emailRegistro" required>
 
 	<input type="submit" value="Enviar">
