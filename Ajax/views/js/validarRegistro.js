@@ -85,8 +85,8 @@ function validarRegistro(){
     //***Validar usuario*********/
     if (usuario !="") { //Si la variable viene llena
 
-          var caracteres =usuario.legth; //Sacar la longitud
-          var expresion =  /^[a-zA-Z0-9]*$/
+          var caracteres =usuario.length;; //Sacar la longitud
+          var expresion =  /^[a-zA-Z0-9]*$/;
           if (caracteres > 10) { //Si la longitud es mayor a 6
 
                 document.querySelector("label[for='usuarioRegistro']").innerHTML += "<br> Escriba por favor menos de 10 caracteres.";
@@ -98,7 +98,7 @@ function validarRegistro(){
             return false;
           }
           if (usuarioExistente) {
-            document.querySelector("label[for='usuarioRegistro'] span").innerHTML += "<p>Este usuario ya existe en la BD</p>";
+            document.querySelector("label[for='usuarioRegistro'] span").innerHTML = "<p>Este usuario ya existe en la BD</p>";
             return false;
           }
 
@@ -110,7 +110,7 @@ function validarRegistro(){
     //***Validar email*********/
     if (email !="") { //Si la variable viene llena
 
-          var expresion =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
+          var expresion =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
           if (!expresion.test(email)) {
             document.querySelector("label[for='emailRegistro']").innerHTML += "<br> Escriba correctamente el email.";
             return false;
@@ -123,7 +123,10 @@ function validarRegistro(){
 
 
     }
+      return true;
+  }
 
-    return true;
-}
+
+
+
 //******************************************************fin ***********************
