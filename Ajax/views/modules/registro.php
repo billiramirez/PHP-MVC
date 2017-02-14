@@ -9,7 +9,7 @@
 	<input type="password" placeholder="Minimo 6 caracteres, incluya numero(s) y una mayuscula" name="passwordRegistro" id="passwordRegistro"
 		pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
 
-	<label for="emailRegistro">Email</label>
+	<label for="emailRegistro">Email<span></span></label>
 	<input type="email" placeholder="Ingrese un email valido" name="emailRegistro" id="emailRegistro" required>
 
 	<p style="text-align:center"><input type="checkbox" id="terminos"><a href="#">Acepta Terminos y condiciones </a></p>
