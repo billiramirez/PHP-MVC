@@ -79,9 +79,7 @@ $("#emailRegistro").change(function(){
 function validarRegistro(){
 
   var usuario = document.querySelector("#usuarioRegistro").value; //Seleccionamos el valor utilizando el ID
-  var password = document.querySelector("#passwordRegistro").value;
   var email = document.querySelector("#emailRegistro").value;
-  var terminos = document.querySelector("#terminos").checked;
 
 
     //***Validar usuario*********/
@@ -89,9 +87,9 @@ function validarRegistro(){
 
           var caracteres =usuario.legth; //Sacar la longitud
           var expresion =  /^[a-zA-Z0-9]*$/
-          if (caracteres > 6) { //Si la longitud es mayor a 6
+          if (caracteres > 10) { //Si la longitud es mayor a 6
 
-                document.querySelector("label[for='usuarioRegistro']").innerHTML += "<br> Escriba por favor menos de 6 caracteres.";
+                document.querySelector("label[for='usuarioRegistro']").innerHTML += "<br> Escriba por favor menos de 10 caracteres.";
                 //   <--- selectionamos el label y agregamos codigo html con el innerHTML
                 return false;
           }
@@ -107,25 +105,7 @@ function validarRegistro(){
 
     }
 
-    //***Validar password*********/
-    if (password !="") { //Si la variable viene llena
 
-          var caracteres =password.legth; //Sacar la longitud
-          var expresion =  /^[a-zA-Z0-9]*$/
-          if (caracteres < 6) { //Si la longitud es mayor a 6
-
-                document.querySelector("label[for='passwordRegistro']").innerHTML += "<br> Escriba por favor mas de 6 caracteres.";
-                //   <--- selectionamos el label y agregamos codigo html con el innerHTML
-                return false;
-          }
-          if (!expresion.test(password)) {
-            document.querySelector("label[for='passwordRegistro']").innerHTML += "<br> No escriba caracteres especiales.";
-            return false;
-          }
-
-
-
-    }
 
     //***Validar email*********/
     if (email !="") { //Si la variable viene llena
@@ -135,7 +115,7 @@ function validarRegistro(){
             document.querySelector("label[for='emailRegistro']").innerHTML += "<br> Escriba correctamente el email.";
             return false;
           }
-          
+
           if (emailExistente) {
             document.querySelector("label[for='emailRegistro'] span").html('<p>Este email ya existe en la BD</p>');
             return false;
@@ -144,16 +124,6 @@ function validarRegistro(){
 
     }
 
-      //***Validar terminos*********/
-    if (!terminos) {
-
-      document.querySelector("form").innerHTML += "<br> Acepte terminos y condiciones para continuar.";
-      document.querySelector("#usuarioRegistro").value = usuario; // Para no borrar los datos que tenian los inputs
-      document.querySelector("#passwordRegistro").value = password;
-      document.querySelector("#emailRegistro").value = email;
-      return false;
-
-    }
     return true;
 }
 //******************************************************fin ***********************

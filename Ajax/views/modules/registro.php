@@ -21,7 +21,7 @@
 
 			if ($_GET["action"] == "ok") {
 				# code...
-				echo "Registro exitoso";
+				echo "Has sido registrado correctamente, <br /> por favor da click en el link de activación que ha sido enviado a tu dirección de correo";
 			}
 	}
 

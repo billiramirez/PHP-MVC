@@ -10,12 +10,17 @@ require_once "conexion.php";
       public function registroUsuarioModel($datosModel, $tabla)
       {
         # code...
-            $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(usuario, password, email) VALUES
-           (:usuario,:password,:email)");
+            date_default_timezone_set('America/Managua');
+            $login_date = date("Y/m/d");
 
-            $stmt -> bindParam(":usuario", $datosModel["usuario"], PDO::PARAM_STR);
-            $stmt -> bindParam(":password", $datosModel["password"], PDO::PARAM_STR);
+
+            $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(username, email, login_date ) VALUES
+           (:username,:email,:login_date)");
+
+            $stmt -> bindParam(":username", $datosModel["usuario"], PDO::PARAM_STR);
             $stmt -> bindParam(":email", $datosModel["email"], PDO::PARAM_STR);
+            $stmt -> bindParam(":login_date", $login_date, PDO::PARAM_STR);
+
 
             if ($stmt ->  execute()) {
               # code...
@@ -29,13 +34,13 @@ require_once "conexion.php";
 
       }
 
-  
+
         #Validar Usuario EXISTENTE
         #===============================================================================
         public function validarUsuarioModel($datosModel,$tabla){
 
-          $stmt = Conexion::conectar()->prepare("SELECT usuario FROM $tabla WHERE usuario = :usuario");
-          $stmt->bindParam(":usuario", $datosModel, PDO::PARAM_STR);
+          $stmt = Conexion::conectar()->prepare("SELECT username FROM $tabla WHERE username = :username");
+          $stmt->bindParam(":username", $datosModel, PDO::PARAM_STR);
           $stmt->execute();
 
           return $stmt->fetch();

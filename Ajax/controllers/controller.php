@@ -38,24 +38,47 @@ class MvcController{
 	/********************************************************************/
 	public function registroUsuarioController(){
 
+
 				if (isset($_POST['usuarioRegistro'])) {
-							# code...
+
+
 							if(preg_match('/^[a-zA-Z0-9]+$/', $_POST["usuarioRegistro"]) &&
-			   					preg_match('/^[a-zA-Z0-9]+$/', $_POST["passwordRegistro"]) &&
 			   					preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["emailRegistro"])){
 								# code...
-										$encriptar = crypt($_POST["passwordRegistro"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+										// $encriptar = crypt($_POST["passwordRegistro"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 										$datosController = array('usuario' =>$_POST['usuarioRegistro'] ,
-																							 'password' =>$encriptar,
 																							 'email' =>$_POST['emailRegistro']);
 
-										$respuesta = Datos::registroUsuarioModel($datosController, "usuarios");
-										if ($respuesta == "success") {
+										$respuesta = Datos::registroUsuarioModel($datosController, "usuario");
+										if ($respuesta == "success"){
+											/*****************************PARAMETROS DEL CORREO*********************************************/
+											include("sendMail.php");
+											require_once "vendor/autoload.php";
+											$encriptarEmail = crypt($_POST["emailRegistro"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+											$message = "Hi ".$_POST['usuarioRegistro']." Please click this link to activate your account:
+                        http://www.wimixsolutions.com/verify.php?email=".$encriptarEmail;
+
+												$to       =   $_POST['emailRegistro'];
+												$subject  =   "Registrarse | Verificacion";
+												// $message  =   "hello <i>how are you.</i>";
+												$name     =   $_POST['usuarioRegistro'];
+												$mailsend =   sendmail($to,$subject,$message,$name);
+												if($mailsend==1){
+													echo '<h2>email sent.</h2>';
+												}
+												else{
+													echo '<h2>Hay problemas con el correo.</h2>';
+												}
+												/************************************************************************************/
 												header("location:ok");
+
 										}
 
 										else {
+
 												header("location:index.php");
+												echo "ERror";
 										}
 							}
 
@@ -71,8 +94,8 @@ class MvcController{
 
 					$datosController = $validarUsuario;
 
-					$respuesta = Datos::validarUsuarioModel($datosController, "usuarios");
-					if (count($respuesta["usuario"]) > 0){
+					$respuesta = Datos::validarUsuarioModel($datosController, "usuario");
+					if (count($respuesta["username"]) > 0){
 						# code...
 						echo 0;
 					}
@@ -88,7 +111,7 @@ class MvcController{
 
 					$datosController = $validarEmail;
 
-					$respuesta = Datos::validarEmailModel($datosController, "usuarios");
+					$respuesta = Datos::validarEmailModel($datosController, "usuario");
 					if (count($respuesta["email"]) > 0){
 						# code...
 						echo 0;
