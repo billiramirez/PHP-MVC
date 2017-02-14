@@ -96,11 +96,11 @@ function validarRegistro(){
                 return false;
           }
           if (!expresion.test(usuario)) {
-            document.querySelector("label[for='usuarioRegistro']").innerHTML += "<br> No escriba caracteres especiales.";
+            document.querySelector("label[for='usuarioRegistro']").innerHTML = "<br> No escriba caracteres especiales.";
             return false;
           }
           if (usuarioExistente) {
-            document.getElementById('#usuarioRegistro').querySelector("label[for='usuarioRegistro'] span").innerHTML += "<p>Este usuario ya existe en la BD</p>";
+            document.querySelector("label[for='usuarioRegistro'] span").innerHTML = "<p>Este usuario ya existe en la BD</p>";
             return false;
           }
 
