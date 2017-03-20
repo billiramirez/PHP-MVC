@@ -56,8 +56,9 @@ class MvcController{
 											require_once "vendor/autoload.php";
 											$encriptarEmail = crypt($_POST["emailRegistro"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-											$message = "Hi ".$_POST['usuarioRegistro']." Por favor haz click aqui para activar tu cuenta:
+											 $message = "Hi ".$_POST['usuarioRegistro']." Por favor haz click aqui para activar tu cuenta:
                         http://www.wimixsolutions.com/verify.php?email=".$encriptarEmail." ";
+
 
 												$to       =   $_POST['emailRegistro'];
 												$subject  =   "Registrarse | Verificacion";
